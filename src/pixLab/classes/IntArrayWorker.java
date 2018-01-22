@@ -29,11 +29,12 @@ public class IntArrayWorker
     return total;
   }
   
-  public int getColTotal()
+  public int getColTotal(int column)
   {
-	  int col = 0;
+	  int colTotal = 0;
 	  
-	  return 1;
+	  
+	  return colTotal;
   }
   
   /**

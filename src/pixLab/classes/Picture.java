@@ -173,6 +173,13 @@ public class Picture extends SimplePicture
       }
     }   
   }
+  
+  public void coffeeFilter(int startRow, int startCol)
+  {
+	  Pixel fromPixel = null;
+	  Pixel toPixel = null;
+	  Picture gengar = new Picture(".png");
+  }
 
   /** Method to create a collage of several pictures */
   public void createCollage()

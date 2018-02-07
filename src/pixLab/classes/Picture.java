@@ -119,6 +119,49 @@ public class Picture extends SimplePicture
     } 
   }
   
+  public void glitchFilter()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  int shiftAmount = (int) (.33 * pixels[0].length);
+	  Pixel leftPixel = null;
+	  Pixel rightPixel = null;
+	  Pixel midPixel = null;
+	  int width = pixels[0].length;
+	  for (int row = 0; row < pixels.length; row++)
+	  {
+		  for (int col = 0; col < pixels[0].length; col++)
+		  {
+			  leftPixel = pixels[row][col];
+			  rightPixel = pixels[row][(width - shiftAmount + col) % width];
+			  midPixel = pixels[row][(col + shiftAmount) % width];
+			  
+			  Color leftColor = leftPixel.getColor();
+			  Color rightColor = rightPixel.getColor();
+			  Color midColor = midPixel.getColor();
+			  
+			  leftPixel.setColor(rightColor);
+			  rightPixel.setColor(midColor);
+			  midPixel.setColor(leftColor);
+		  }
+	  }
+  }
+  
+  public void mirrorBottomTop()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel bottomPixel = null;
+	  Pixel topPixel = null;
+	  for (int col = 0; col < pixels[0].length; col++)
+	  {
+		  for(int row=0; row < pixels[0].length/2; row++)
+		  {
+			  bottomPixel = pixels[row][col];
+			  topPixel = pixels[row][col];
+			  bottomPixel.setColor(topPixel.getColor());
+		  }
+	  }
+  }
+  
   /** Mirror just part of a picture of a temple */
   public void mirrorTemple()
   {
@@ -178,7 +221,28 @@ public class Picture extends SimplePicture
   {
 	  Pixel fromPixel = null;
 	  Pixel toPixel = null;
-	  Picture gengar = new Picture(".png");
+	  Picture coffee = new Picture("coffee.png");
+	  Pixel[][] toPixels = this.getPixels2D();
+	  Pixel[][] fromPixels = coffee.getPixels2D();
+	  
+	  int fromRow = 0;
+	  for (int toRow = startRow; toRow < toPixels.length && fromRow < fromPixels.length; toRow++)
+	  {
+		  int fromCol = 0;
+		  for (int toCol = 0; toCol < toPixels[0].length && fromCol < fromPixels[0].length; toCol++)
+		  {
+			  fromPixel = fromPixels[fromRow][fromCol];
+			  toPixel = toPixels[toRow][toCol];
+			  if (fromPixel.isTransparent())
+			  {
+				  toPixel.setRed(fromPixel.getRed());
+				  toPixel.setBlue(fromPixel.getGreen());
+				  toPixel.setGreen(fromPixel.getBlue());
+			  }
+			  fromCol++;
+		  }
+		  fromRow++;
+	  }
   }
 
   /** Method to create a collage of several pictures */

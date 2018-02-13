@@ -84,7 +84,7 @@ public class PictureTester
     // and comment out the ones you don't want
     // to run
 	testGlitch();
-    testZeroBlue();
+    //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
@@ -94,7 +94,7 @@ public class PictureTester
     //testMirrorVertical();
     //testMirrorBottomTop();
     //testGengar();
-    testMirrorTemple();
+    //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();

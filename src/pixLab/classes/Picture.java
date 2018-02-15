@@ -139,6 +139,47 @@ public class Picture extends SimplePicture
 			  pixels[row][col].setColor(currentColors[(col + shiftAmount) % width]);
 		  }
 	  }
+	  int mirrorPoint = 276;
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    int count = 0;
+	    
+	    // loop through the rows
+	    for (int row = 27; row < 97; row++)
+	    {
+	      // loop from 13 to just before the mirror point
+	      for (int col = 13; col < mirrorPoint; col++)
+	      {
+	        
+	        leftPixel = pixels[row][col];      
+	        rightPixel = pixels[row]                       
+	                         [mirrorPoint - col + mirrorPoint];
+	        rightPixel.setGreen(0);
+	      }
+	    }
+  }
+  
+  public void addMessage(String message, int xPos, int yPos, Color color)
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	    Pixel leftPixel = null;
+	    Pixel rightPixel = null;
+	    int width = pixels[0].length;
+	    int shiftAmount = (int) (.33 * pixels[0].length);
+	    for (int row = 0; row < pixels.length; row++)
+		  {
+			  Color [] currentColors = new Color[pixels[0].length];
+			  
+			  for (int col = 0; col < pixels[row].length; col++)
+			  {
+				  currentColors[col] = pixels[row][col].getColor();		  
+			  }
+			  
+			  for (int col = 0; col < pixels[0].length; col++)
+			  {
+				  pixels[row][col].setColor(currentColors[(col + shiftAmount) % width]);
+			  }
+		  }
   }
   
   public void mirrorBottomTop()

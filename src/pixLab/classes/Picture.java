@@ -325,6 +325,21 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void classFilter()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  int width = pixels[0].length;
+	  int height = pixels.length;
+	  int border = (int) (0.05 * height);
+	  for(int row = border; row < (height-border); row++)
+	  {
+		  for(int col = border; col < (border + 20); col++)
+		  {
+			  pixels[row][col] = pixels[row][col + 20];
+		  }
+	  }
+  }
+  
   
   /* Main method for testing - each class in Java can have a main 
    * method 
@@ -333,8 +348,11 @@ public class Picture extends SimplePicture
   {
     Picture beach = new Picture("beach.jpg");
     beach.explore();
-    beach.zeroBlue();
+    beach.classFilter();
+    beach.addMessage("Hello", 1, 2, Color.BLUE);
+    new SimplePicture().write("DaneHeapsClassFilter.jpg");
     beach.explore();
+    
   }
   
 } // this } is the end of class Picture, put all new methods before this
